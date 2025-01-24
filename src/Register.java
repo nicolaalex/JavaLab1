@@ -2,6 +2,7 @@
 
 import java.util.Scanner;
 
+
 class Register {
     //Declare Denominations
     Denomination hundredDollar;
