@@ -1,4 +1,5 @@
-// Creates JFrame and adds a RegisterPanel
+// This creates JFrame and adds a RegisterPanel
+
 import java.awt.*;
 import javax.swing.*;
 
