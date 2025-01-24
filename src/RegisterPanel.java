@@ -1,4 +1,4 @@
-// Listens for changes in inputPanel and holds PursePanel
+// focus on changes in input Panel and holds PursePanel
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,15 +18,16 @@ public class RegisterPanel extends JPanel {
         inputPanel = new JPanel();
         input = new JTextField(10);
         changePanel = new PursePanel();
-        changeLabel = new JLabel("Purse Contents");
+        changeLabel = new JLabel("Amount in Purse");
         inputLabel = new JLabel("Please enter the amount of money: "); //label to enter amount
         input.addActionListener(new InputListener());
 
         //Adds input and label to panel
-        input.setFont(new Font("Arial", Font.PLAIN, 20));
-        inputLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        input.setFont(new Font("Arial", Font.PLAIN, 22));
+        inputLabel.setFont(new Font("Arial", Font.PLAIN, 22));
         inputPanel.add(inputLabel);
         inputPanel.add(input);
+
         //Adds panels to frame
         this.add(inputPanel);
         this.add(changePanel);
@@ -41,24 +42,25 @@ public class RegisterPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             //Gets input amount
             double amount = Double.parseDouble(input.getText());
+
             //Returns contents of purse
             Purse purse = register.makeChange(amount);
 
-            //Diplays amount
+            //Display amount
             inputLabel.setText("$" + purse.getValue());
             //Prints empty purse
             if (amount <= 0.001)
-                inputLabel.setText("Empty Purse.");
+                inputLabel.setText("This Purse is empty.");
 
 
             // modify the panels
             inputPanel.setBackground(Color.gray);
-            changePanel.setPreferredSize(new Dimension(900, 800));
-            changePanel.setBackground(Color.BLUE);
+            changePanel.setPreferredSize(new Dimension(800, 750));
+            changePanel.setBackground(Color.WHITE);
 
             //  Sets the change panel and add to input Panel
             changePanel.setPurse(purse);
-            changeLabel.setForeground(Color.white);
+            changeLabel.setForeground(Color.black);
             changeLabel.setFont(new Font("Arial", Font.BOLD, 40));
             changePanel.add(changeLabel);
             inputPanel.add(changePanel);

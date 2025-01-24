@@ -9,9 +9,9 @@ public class MakingChange {
         JFrame frame = new JFrame("Making Change");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Creates registerPanel and adds to frame
+        // creates register Panel and adds to frame
         RegisterPanel registerPanel = new RegisterPanel();
-        frame.setPreferredSize(new Dimension(800, 600));
+        frame.setPreferredSize(new Dimension(850, 700));
 
         frame.getContentPane().add(registerPanel);
         frame.pack();
