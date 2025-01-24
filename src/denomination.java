@@ -1,6 +1,6 @@
 
 // record for denomination
-public record denomination(string name, double amt, string form, string img ) {
+public record denomination(String name, double amt, String form, String img ) {
 
 
 }
