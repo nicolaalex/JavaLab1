@@ -47,7 +47,8 @@ public class RegisterPanel extends JPanel {
             Purse purse = register.makeChange(amount);
 
             //Display amount
-            inputLabel.setText("$" + purse.getValue());
+            inputLabel.setText("$" + String.format("%.2f", purse.getValue()));
+
             //Prints empty purse
             if (amount <= 0.001)
                 inputLabel.setText("This Purse is empty.");
