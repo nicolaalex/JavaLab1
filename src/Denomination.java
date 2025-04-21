@@ -1,30 +1,31 @@
-public class Denomination {
-    private final String name;
-    private final double amount;
-    private final String type;
-    private final String img;
+// represents a single denomination (e.g., Bill or Coin)
 
-    public Denomination(String name, double amount, String type, String img) {
+public class Denomination {
+    private String name;
+    private double amt;
+    private String type;
+    private String img;
+
+    // Constructor to initialize denomination properties
+    public Denomination(String name, double amt, String type, String img) {
         this.name = name;
-        this.amount = amount;
+        this.amt = amt;
         this.type = type;
         this.img = img;
     }
 
-    public double amt() { return amount; }
-    public String name() { return name; }
-    public String img() { return img; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Denomination)) return false;
-        Denomination d = (Denomination) o;
-        return Double.compare(d.amount, amount) == 0 && name.equals(d.name);
+    // Getter for denomination amount
+    public double amt() {
+        return amt;
     }
 
-    @Override
-    public int hashCode() {
-        return name.hashCode();
+    // Getter for denomination image
+    public String img() {
+        return img;
+    }
+
+    // Getter for denomination name
+    public String name() {
+        return name;
     }
 }

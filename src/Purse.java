@@ -1,28 +1,40 @@
-import java.util.LinkedHashMap;
+// Purse class: Stores the denominations and provides methods to add or remove money.
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Purse {
     LinkedHashMap<Denomination, Integer> cash = new LinkedHashMap<>();
 
-    public void add(Denomination money, int num) {
-        cash.put(money, cash.getOrDefault(money, 0) + num);
+    // Adds a denomination to the purse
+    public void add(Denomination denomination, int num) {
+        cash.put(denomination, cash.getOrDefault(denomination, 0) + num);
     }
 
+    // Removes a denomination from the purse
+    public double remove(Denomination denomination, int num) {
+        if (cash.getOrDefault(denomination, 0) < num) {
+            System.out.println("Not enough " + denomination.name() + " to remove.");
+            return 0;
+        }
+        cash.put(denomination, cash.get(denomination) - num);
+        return denomination.amt() * num;
+    }
+
+    // Returns the total value in the purse
     public double getValue() {
         double total = 0;
-        for (Denomination d : cash.keySet()) {
-            total += cash.get(d) * d.amt();
+        for (Denomination denomination : cash.keySet()) {
+            total += cash.get(denomination) * denomination.amt();
         }
         return total;
     }
 
-    @Override
+    // Returns a string representation of the contents of the purse
     public String toString() {
-        if (cash.isEmpty()) return "This Purse is Empty";
-        StringBuilder sb = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         for (HashMap.Entry<Denomination, Integer> entry : cash.entrySet()) {
-            sb.append(entry.getValue()).append(" ").append(entry.getKey().name()).append("\n");
+            result.append(entry.getValue()).append(" ").append(entry.getKey().name()).append("\n");
         }
-        return sb.toString();
+        return result.length() == 0 ? "The purse is empty." : result.toString();
     }
 }
