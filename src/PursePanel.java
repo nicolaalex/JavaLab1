@@ -4,64 +4,34 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class PursePanel extends JPanel {
-    //creat purse
     private Purse purse = new Purse();
 
-    //set the purse
     public void setPurse(Purse purse) {
         this.purse = purse;
     }
 
-    //Draws the images
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int x = 0;
-        int y = 50;
-        //if empty display nothing
-        if (purse == null) {
-            return;
-        }
+        int x = 10;  // start X position
+        int y = 50;  // start Y position
 
-        // update y value for overflow
-        int new_y = 0;
+        if (purse == null) return;
 
-        //For each denomination print the number of images
         for (HashMap.Entry<Denomination, Integer> entry : purse.cash.entrySet()) {
-
-            // denomination and count
-            Denomination money = entry.getKey();
+            Denomination d = entry.getKey();
             int count = entry.getValue();
+            ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(d.img())));
+            Image img = icon.getImage();
+            int imgHeight = img.getHeight(this);
+            int imgWidth = img.getWidth(this);
 
-            // image for the denomination
-            ImageIcon icon= new ImageIcon(Objects.requireNonNull(getClass().getResource(money.img())));
-            Image image = icon.getImage();
-
-            // shoews each image for denomination
+            // stack vertically
             for (int i = 0; i < count; i++) {
-                g.drawImage(image, x, y, this);
-                y += 30;
-
+                g.drawImage(img, x, y + (i * (imgHeight + 5)), this);
             }
 
-            // new line of images with new y value
-            if (x + image.getWidth(this) > 700)
-            {
-                x = 0;
-                y = image.getHeight(this) + 70;
-                new_y = y;
-            }
-            //increment x value
-            else
-            {
-                x += image.getWidth(this);
-                y = 50 + new_y;
-            }
-
-
+            // move to next column after this denomination
+            x += imgWidth + 15;
         }
-
-
     }
-
-
 }
